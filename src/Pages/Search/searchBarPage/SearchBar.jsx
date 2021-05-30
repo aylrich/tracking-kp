@@ -8,29 +8,20 @@ class SearchBar extends Component{
     }
 
     searchButton = () => {
-        const nip = encodeURIComponent(this.nomorInduk.value)
 
-        if(nip == null){
+        const nip = this.nomorInduk.value;
+        if(nip.length === 0){
             alert('Data Tidak Boleh Kosong')
+        }else{
+            this.props.history.push(`/search/${nip}`);
         }
-
-        var URL = "http://mutasi.sdm.kemdikbud.go.id/layanan/json/ws_status_proses_ds_kp.php?nip="+nip
-
-        fetch(URL)
-        .then(response => response.json())
-        .then(json => {
-                this.setState({
-                    dataDosen: json
-                })
-                console.log(this.state.dataDosen)
-        })
-            
+           
     }
 
     render(){
         return(
             <Fragment>
-            <div className="wrap">  
+            <div className="wrap-home">  
             <h1 className="text-title">Cari usulan kenaikan pangkat</h1>
                 <div className="search">
                     <input type="text" className="searchTerm" name="nomorInduk" 
