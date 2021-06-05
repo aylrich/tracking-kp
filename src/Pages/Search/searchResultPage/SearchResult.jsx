@@ -3,28 +3,74 @@ import './SearchResult.css'
 
 class SearchResult extends Component{
 
-    state = {
-        classProcessStep1: "process-step step-1",
-        classProcessStep2: "process-step step-2",
-        classProcessStep3: "process-step step-3",
-        classProcessStep4: "process-step step-4",
-        classProcessWrap: "process-wrap active-step1",
-        dataKP : []
+    constructor(props) {
+        super(props)
+        this.processStep = this.processStep.bind(this)
+        this.state = {
+
+            //class
+            classProcessStep1: "process-step step-1",
+            classProcessStep2: "process-step step-2",
+            classProcessStep3: "process-step step-3",
+            classProcessStep4: "process-step step-4",
+            classProcessWrap: "process-wrap active-step1",
+            divDisabled1 : true,
+            divDisabled2 : true,
+            divDisabled3 : true,
+            divDisabled4 : true,
+  
+            //data
+            dataKP : []
+            
+        }
+
     }
 
-    componentDidMount(){
+    
+
+    componentDidMount(props){
 
         var nomor = encodeURIComponent(this.props.match.params.nip);
 
         fetch(`http://mutasi.sdm.kemdikbud.go.id/layanan/json/ws_status_proses_ds_kp.php?nip=${nomor}`)
         .then(response => response.json())
         .then(json => {
+
+
                 this.setState({
                     dataKP: json
                 })
-                console.log("dataKP",this.state.dataKP)
+
+                let dataSize = this.state.dataKP.length
+
+                if (dataSize === 3){
+                    this.setState({
+                        divDisabled4 : false
+                    })
+                } else if (dataSize === 2){
+                    this.setState({
+                        divDisabled4 : false,
+                        divDisabled3 : false
+                    })
+                } else if (dataSize === 1){
+                    this.setState({
+                        divDisabled4 : false,
+                        divDisabled3 : false,
+                        divDisabled2 : false
+                    })
+                }
+                    const formCard = document.getElementById('card0');
+                    formCard.style.display = "block"
+                
+
+                
+        })
+        .catch(err => {
+            console.error(err)
+            this.props.history.push(`/`);
         });
-        
+
+
     }
 
     processStep = (event) => {
@@ -35,6 +81,10 @@ class SearchResult extends Component{
                 this.setState({
                     classProcessWrap : "process-wrap active-step1"
                 });
+                document.getElementById('card0').style.display = 'block';
+                document.getElementById('card1').style.display = 'none';
+                document.getElementById('card2').style.display = 'none';
+                document.getElementById('card3').style.display = 'none';
                 break;
             }
                 
@@ -42,31 +92,48 @@ class SearchResult extends Component{
                 this.setState({
                     classProcessWrap : "process-wrap active-step2"
                 });
+                document.getElementById('card1').style.display = 'block';
+                document.getElementById('card0').style.display = 'none';
+                document.getElementById('card2').style.display = 'none';
+                document.getElementById('card3').style.display = 'none';
                 break;
             }
             case " step-3": {
                 this.setState({
                     classProcessWrap : "process-wrap active-step3"
                 });
+                document.getElementById('card2').style.display = 'block';
+                document.getElementById('card1').style.display = 'none';
+                document.getElementById('card0').style.display = 'none';
+                document.getElementById('card3').style.display = 'none';
                 break;
             }
             case " step-4": {
                 this.setState({
                     classProcessWrap : "process-wrap active-step4"
                 });
+                document.getElementById('card3').style.display = 'block';
+                document.getElementById('card0').style.display = 'none';
+                document.getElementById('card1').style.display = 'none';
+                document.getElementById('card2').style.display = 'none';
                 break;
             }
             default: {
                     this.setState({
                         classProcessWrap : "process-wrap active-step1"
                     });
+                    document.getElementById('card0').style.display = 'block';
+                    document.getElementById('card1').style.display = 'none';
+                    document.getElementById('card2').style.display = 'none';
+                    document.getElementById('card3').style.display = 'none';
                 }
 
         }
 
+
     }
 
-    render(){
+    render(){   
         return(
             <div className="container-fluid">
                 <div className="row justify-content-center mt-0">
@@ -79,26 +146,30 @@ class SearchResult extends Component{
                             <div className="process-main">
                                 <div className="col-3">
                                 <div className="process-step-cont">
-                                    <div className={this.state.classProcessStep1} onClick={() => this.processStep(this.state.classProcessStep1)}></div>
+                                    <div className={this.state.classProcessStep1} 
+                                    style={{pointerEvents : this.state.divDisabled1 ? 'block' : 'none'}}  onClick={() => this.processStep(this.state.classProcessStep1)}></div>
                                     <span className="process-label">Tahap 1</span>
                                 </div>
                                 </div>
                                 <div className="col-3">
                                 <div className="process-step-cont">
-                                    <div className={this.state.classProcessStep2} onClick={() => this.processStep(this.state.classProcessStep2)}></div>
+                                    <div className={this.state.classProcessStep2} 
+                                    style={{pointerEvents : this.state.divDisabled2 ? 'block' : 'none'}} onClick={() => this.processStep(this.state.classProcessStep2)}></div>
                                     <span className="process-label">Tahap 2</span>
                                 </div>
                                 </div>
 
                                 <div className="col-3">
                                 <div className="process-step-cont">
-                                    <div className={this.state.classProcessStep3} onClick={() => this.processStep(this.state.classProcessStep3)}></div>
+                                    <div className={this.state.classProcessStep3} 
+                                    style={{pointerEvents : this.state.divDisabled3 ? 'block' : 'none'}} onClick={() => this.processStep(this.state.classProcessStep3)}></div>
                                     <span className="process-label">Tahap 3</span>
                                 </div>
                                 </div>
                                 <div className="col-3">
                                 <div className="process-step-cont">
-                                    <div className={this.state.classProcessStep4} onClick={() => this.processStep(this.state.classProcessStep4)}></div>
+                                    <div className={this.state.classProcessStep4} 
+                                    style={{pointerEvents : this.state.divDisabled4 ? 'block' : 'none'}} onClick={() => this.processStep(this.state.classProcessStep4)}></div>
                                     <span className="process-label">Tahap 4</span>
                                 </div>
                                 </div>
@@ -108,38 +179,28 @@ class SearchResult extends Component{
                         </div>
                         <div className="row">
                         <div className="col-md-12 mx-0">
-                            <div className="form-card active-form-card" id="card1">
-                            <h2 className="fs-title">Personal Information1</h2> 
-                            <input type="text" disabled="disabled" name="status" placeholder="Status" /> 
-                            <input type="text" disabled="disabled" name="fname" placeholder="NIP" /> 
-                            <input type="text" disabled="disabled" name="lname" placeholder="Nama" /> 
-                            <input type="text" disabled="disabled" name="phno" placeholder="Contact No." /> 
-                            <input type="text" disabled="disabled" name="phno_2" placeholder="Alternate Contact No." />
-                            </div>
-                            <div className="form-card" id="card2">
-                            <h2 className="fs-title">Personal Information2</h2> 
-                            <input type="text" disabled="disabled" name="status" placeholder="Status" /> 
-                            <input type="text" disabled="disabled" name="fname" placeholder="NIP" /> 
-                            <input type="text" disabled="disabled" name="lname" placeholder="Nama" /> 
-                            <input type="text" disabled="disabled" name="phno" placeholder="Contact No." /> 
-                            <input type="text" disabled="disabled" name="phno_2" placeholder="Alternate Contact No." />
-                            </div>
-                            <div className="form-card" id="card3">
-                            <h2 className="fs-title">Personal Information3</h2> 
-                            <input type="text" disabled="disabled" name="status" placeholder="Status" /> 
-                            <input type="text" disabled="disabled" name="fname" placeholder="NIP" /> 
-                            <input type="text" disabled="disabled" name="lname" placeholder="Nama" /> 
-                            <input type="text" disabled="disabled" name="phno" placeholder="Contact No." /> 
-                            <input type="text" disabled="disabled" name="phno_2" placeholder="Alternate Contact No." />
-                            </div>
-                            <div className="form-card" id="card4">
-                            <h2 className="fs-title">Personal Information4</h2> 
-                            <input type="text" disabled="disabled" name="status" placeholder="Status" /> 
-                            <input type="text" disabled="disabled" name="fname" placeholder="NIP" /> 
-                            <input type="text" disabled="disabled" name="lname" placeholder="Nama" /> 
-                            <input type="text" disabled="disabled" name="phno" placeholder="Contact No." /> 
-                            <input type="text" disabled="disabled" name="phno_2" placeholder="Alternate Contact No." />
-                            </div>
+
+                            {
+                                this.state.dataKP.map((datakp, index) => {
+                                    var refsId = "card"+index
+                                    return(
+                                    <div className="form-card" key={index} id={refsId} >
+                                    <h2 className="fs-title">"{datakp.tindakan}"</h2> 
+                                    <br/>
+                                    <h3 className="fs-title">NIP</h3> 
+                                    <input type="text" disabled="disabled" name="nip" value={datakp.nip_sk}/>
+                                    <h3 className="fs-title">Nama</h3>  
+                                    <input type="text" disabled="disabled" name="nama" value={datakp.nama_pemilik_sk}/> 
+                                    <h3 className="fs-title">Satker</h3> 
+                                    <input type="text" disabled="disabled" name="satker" value={datakp.unit_kerja_pemilik_sk}/> 
+                                    <h3 className="fs-title">Periode</h3> 
+                                    <input type="text" disabled="disabled" name="satker" value={datakp.periode_tahun}/>
+                                    <h3 className="fs-title">Waktu Tindakan</h3> 
+                                    <input type="text" disabled="disabled" name="timeUpdate" value={datakp.waktu_tindakan}/> 
+                                    </div>
+                                    )
+                                })
+                            }
                         </div>
                         </div>
                     </div>

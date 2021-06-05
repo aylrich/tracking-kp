@@ -154,7 +154,7 @@ body{
   .active-step1-mini3 .col-3:first-child .process-dots:nth-child(-n + 3),
   .active-step1-mini4 .col-3:first-child .process-step,
   .active-step1-mini4 .col-3:first-child .process-dots:nth-child(-n + 4) {
-    background-color: #f89828;
+    background-color: #07bdf5;
   }
   .active-step1-mini2 .col-3:first-child .process-dots:first-child,
   .active-step1-mini3 .col-3:first-child .process-dots:nth-child(-n + 2),
@@ -165,7 +165,7 @@ body{
   .active-step1-mini3 .col-3:first-child .process-label,
   .active-step1-mini2 .col-3:first-child .process-label,
   .active-step1-mini4 .col-3:first-child .process-label {
-    color: #f89828;
+    color: #07bdf5;
   }
   .active-step2 .col-3:first-child,
   .active-step3 .col-3:nth-child(-n + 2),
@@ -185,17 +185,17 @@ body{
   .active-step3 .col-3:nth-child(-n + 3) .process-dots,
   .active-step4 .col-3:nth-child(-n + 4) .process-step,
   .active-step4 .col-3:nth-child(-n + 4) .process-dots {
-    background-color: #f89828;
+    background-color: #07bdf5;
   }
   .active-step2 .col-3:nth-child(-n + 2) .process-label,
   .active-step3 .col-3:nth-child(-n + 3) .process-label,
   .active-step4 .col-3:nth-child(-n + 4) .process-label {
-    color: #f89828;
+    color: #07bdf5;
   }
   .active-step2 .col-3:nth-child(-n + 2):before,
   .active-step3 .col-3:nth-child(-n + 3):before,
   .active-step4 .col-3:nth-child(-n + 4):before {
-    background: #f89828 !important;
+    background: #07bdf5 !important;
   }
   @media screen and (max-width: 640px) {
     .process-main {

@@ -1,10 +1,5 @@
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+/* @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css); */
 
-
-.fa {
-    font-size: 55px;
-    position: relative;
-}
 
 .search {
   width: 100%;
@@ -15,7 +10,7 @@
 .searchTerm {
   width: 100%;
   font-size: 2em; 
-  border: 5px solid #f89828;
+  border: 5px solid #07bdf5;
   border-right: none;
   padding: 5px;
   height: 70px;
@@ -26,7 +21,8 @@
 
 .text-title{
 text-align: center;
-color: #f89828;
+color: #07bdf5;
+font-size: 2em;
 }
 
 .searchButton:hover{
@@ -36,20 +32,36 @@ color: #f89828;
 .searchButton {
   width: 70px;
   height: 70px;
-  border: 1px solid #f89828;
-  background: #f89828;
-  text-align: center;
+  border: 1px solid #07bdf5;
+  background: #07bdf5;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   color: #fff;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   font-size: 50px;
+  position: relative;
 }
 
 /*Resize the wrap to see the search bar change!*/
 .wrap-home{
-  width: 30%;
+  width: auto;
   position: absolute;
-  top: 50%;
+  top: 53%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.wrap-logo{
+  width: auto;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.img-logo {
+  width: 300px;
+  height: 300px;
 }

@@ -1,9 +1,108 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
 
-body{
-  background: #39404A;
-  font-family: 'Open Sans', sans-serif;
+body {
+  margin: 0;
+  font-family: 'segoe ui';
+  background: #decaa4;
 }
 
+.header {
+  padding: 10px 0;
+  background: #07bdf5;
+  box-shadow: 0 4px 6px rgba(0,0,0,.2);  
+}
 
+.container {
+  padding: 0 5px;
+  max-width: 960px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.logo-box {
+  float: left;
+  margin-right: 20px;
+}
+
+.logo-title {
+  float: left;
+  margin-right: auto;
+  color: #fff;
+  font-family: 'Arial';
+}
+
+.logo-box a {
+  outline: none;
+  display: block;
+}
+
+.logo-box img {display: block;}
+
+nav {
+  overflow: hidden;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 25px;
+  height: 70px;
+  line-height: 70px;
+  transition: .5s linear;
+}
+
+nav a {
+  text-decoration: none;
+  display: block;
+  position: relative;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+nav a:after {
+  content: "";
+  width: 0;
+  height: 2px;
+  position: absolute;
+  left: 0;
+  bottom: 15px;
+  background: #007bff;
+  transition: width .5s linear;  
+}
+
+nav a:hover:after {
+  width: 100%;
+  background: #fff;
+}
+
+@media screen and (max-width: 660px) {
+  header {text-align: center;}
+  .logo-box {
+    float: none;
+    display: inline-block;
+    margin: 0 0 10px 0;
+  }
+  ul {float: none;}
+  nav li:first-of-type {margin-left: 0;}
+}
+@media screen and (max-width: 550px) {
+nav {overflow: visible;}
+nav li {
+  display: block;
+  margin: 0;
+  height: 40px;
+  line-height: 40px;
+}
+nav li:hover {background: rgb(255, 255, 255);}
+nav :hover {background: rgb(255, 255, 255);}
+nav a:after {content: "";}
+}
