@@ -66,14 +66,14 @@ class SearchResult extends Component{
                 
         })
         .catch(err => {
-            console.error(err)
+            alert("Data tidak ditemukan")
             this.props.history.push(`/`);
         });
 
 
     }
 
-    processStep = (event) => {
+    processStep = (event, size) =>{
         var stepClass = event.match(/(^|\s)step-\S+/g).toString();
 
         switch(stepClass){
@@ -81,10 +81,24 @@ class SearchResult extends Component{
                 this.setState({
                     classProcessWrap : "process-wrap active-step1"
                 });
-                document.getElementById('card0').style.display = 'block';
-                document.getElementById('card1').style.display = 'none';
-                document.getElementById('card2').style.display = 'none';
-                document.getElementById('card3').style.display = 'none';
+
+                if(size < 4){
+                    document.getElementById('card0').style.display = 'block';
+                    document.getElementById('card1').style.display = 'none';
+                    document.getElementById('card2').style.display = 'none';
+                }else if(size < 3){
+                    document.getElementById('card0').style.display = 'block';
+                    document.getElementById('card1').style.display = 'none';
+                }else if(size < 2){
+                    document.getElementById('card0').style.display = 'block';
+                }else{
+                    document.getElementById('card0').style.display = 'block';
+                    document.getElementById('card1').style.display = 'none';
+                    document.getElementById('card2').style.display = 'none';
+                    document.getElementById('card3').style.display = 'none';
+                }
+                
+                
                 break;
             }
                 
@@ -92,20 +106,42 @@ class SearchResult extends Component{
                 this.setState({
                     classProcessWrap : "process-wrap active-step2"
                 });
-                document.getElementById('card1').style.display = 'block';
-                document.getElementById('card0').style.display = 'none';
-                document.getElementById('card2').style.display = 'none';
-                document.getElementById('card3').style.display = 'none';
+
+                if(size < 4){
+                    document.getElementById('card1').style.display = 'block';
+                    document.getElementById('card0').style.display = 'none';
+                    document.getElementById('card2').style.display = 'none';
+                } 
+                else if(size < 3){
+                    document.getElementById('card1').style.display = 'block';
+                    document.getElementById('card0').style.display = 'none';
+                }
+                else{
+                    document.getElementById('card1').style.display = 'block';
+                    document.getElementById('card0').style.display = 'none';
+                    document.getElementById('card2').style.display = 'none';
+                    document.getElementById('card3').style.display = 'none';
+                }
+
+                
                 break;
             }
             case " step-3": {
                 this.setState({
                     classProcessWrap : "process-wrap active-step3"
                 });
-                document.getElementById('card2').style.display = 'block';
-                document.getElementById('card1').style.display = 'none';
-                document.getElementById('card0').style.display = 'none';
-                document.getElementById('card3').style.display = 'none';
+
+                if(size < 4){
+                    document.getElementById('card2').style.display = 'block';
+                    document.getElementById('card1').style.display = 'none';
+                    document.getElementById('card0').style.display = 'none';
+                }else{
+                    document.getElementById('card2').style.display = 'block';
+                    document.getElementById('card1').style.display = 'none';
+                    document.getElementById('card0').style.display = 'none';
+                    document.getElementById('card3').style.display = 'none';
+                }
+
                 break;
             }
             case " step-4": {
@@ -147,14 +183,16 @@ class SearchResult extends Component{
                                 <div className="col-3">
                                 <div className="process-step-cont">
                                     <div className={this.state.classProcessStep1} 
-                                    style={{pointerEvents : this.state.divDisabled1 ? 'block' : 'none'}}  onClick={() => this.processStep(this.state.classProcessStep1)}></div>
+                                    style={{pointerEvents : this.state.divDisabled1 ? 'block' : 'none'}}  
+                                    onClick={() => this.processStep(this.state.classProcessStep1, this.state.dataKP.length)}></div>
                                     <span className="process-label">Tahap 1</span>
                                 </div>
                                 </div>
                                 <div className="col-3">
                                 <div className="process-step-cont">
                                     <div className={this.state.classProcessStep2} 
-                                    style={{pointerEvents : this.state.divDisabled2 ? 'block' : 'none'}} onClick={() => this.processStep(this.state.classProcessStep2)}></div>
+                                    style={{pointerEvents : this.state.divDisabled2 ? 'block' : 'none'}} 
+                                    onClick={() => this.processStep(this.state.classProcessStep2, this.state.dataKP.length)}></div>
                                     <span className="process-label">Tahap 2</span>
                                 </div>
                                 </div>
@@ -162,14 +200,16 @@ class SearchResult extends Component{
                                 <div className="col-3">
                                 <div className="process-step-cont">
                                     <div className={this.state.classProcessStep3} 
-                                    style={{pointerEvents : this.state.divDisabled3 ? 'block' : 'none'}} onClick={() => this.processStep(this.state.classProcessStep3)}></div>
+                                    style={{pointerEvents : this.state.divDisabled3 ? 'block' : 'none'}} 
+                                    onClick={() => this.processStep(this.state.classProcessStep3, this.state.dataKP.length)}></div>
                                     <span className="process-label">Tahap 3</span>
                                 </div>
                                 </div>
                                 <div className="col-3">
                                 <div className="process-step-cont">
                                     <div className={this.state.classProcessStep4} 
-                                    style={{pointerEvents : this.state.divDisabled4 ? 'block' : 'none'}} onClick={() => this.processStep(this.state.classProcessStep4)}></div>
+                                    style={{pointerEvents : this.state.divDisabled4 ? 'block' : 'none'}} 
+                                    onClick={() => this.processStep(this.state.classProcessStep4, this.state.dataKP.length)}></div>
                                     <span className="process-label">Tahap 4</span>
                                 </div>
                                 </div>

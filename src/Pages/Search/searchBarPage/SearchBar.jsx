@@ -19,13 +19,13 @@ class SearchBar extends Component{
         const nip = this.state.inputNip;
         if(nip.length === 0){
             alert('Data Tidak Boleh Kosong')
-        }else if(nip.length < 18){
+        }else if(nip.length === 18){
+            this.props.history.push(`/search/${nip}`);
+        }else{
             alert('Silahkan masukkan format nip yang benar')
             this.setState({
                 inputNip : ''
             })
-        }else{
-            this.props.history.push(`/search/${nip}`);
         }
            
     }
@@ -40,7 +40,7 @@ class SearchBar extends Component{
             <h1 className="text-title">Cari usulan kenaikan pangkat</h1>
                 <div className="search">
                     <input type="text" pattern="[0-9]*" className="searchTerm" name="nomorInduk" 
-                    onInput={this.inputChange.bind(this)} onKeyPress={this.searchButton} value={this.state.inputNip}
+                    onInput={this.inputChange.bind(this)} value={this.state.inputNip}
                     placeholder="Masukkan NIP anda" />
                     <button onClick={this.searchButton} className="searchButton">
                     <i className="fa fa-search"></i>
